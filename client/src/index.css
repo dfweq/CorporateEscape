@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 7.1%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 348 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 120 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 120 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 348 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 348 100% 50%;
+    --input: 0 0% 0%;
+    --ring: 348 100% 50%;
+    --sidebar-background: 0 0% 0%; 
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 348 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 120 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 348 100% 50%;
+    --sidebar-ring: 348 100% 50%;
+    --chart-1: 348 100% 50%;
+    --chart-2: 120 100% 50%;
+    --chart-3: 39 100% 50%;
+    --chart-4: 210 100% 50%;
+    --chart-5: 270 100% 50%;
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-deep-space text-foreground font-fira antialiased;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+@layer components {
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 11;
+    animation: scanline 4s linear infinite;
+    pointer-events: none;
+  }
+
+  .terminal::before {
+    content: "_";
+    animation: blink 1.5s infinite;
+  }
+
+  .glitch-effect:hover {
+    animation: glitch 0.3s linear;
+    position: relative;
+  }
+
+  .glitch-effect:hover::before,
+  .glitch-effect:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-effect:hover::before {
+    left: 2px;
+    text-shadow: -1px 0 #00FF00;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch 0.5s linear alternate-reverse;
+  }
+
+  .glitch-effect:hover::after {
+    left: -2px;
+    text-shadow: -1px 0 #FF0033;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch 0.5s linear alternate-reverse;
+  }
+
+  .company-btn:hover {
+    box-shadow: 0 0 15px #FF0033, 0 0 25px #FF0033;
+    text-shadow: 0 0 5px #FFFFFF;
+  }
+
+  .company-btn.active {
+    box-shadow: 0 0 15px #00FF00, 0 0 25px #00FF00;
+    border-color: #00FF00;
+    text-shadow: 0 0 5px #FFFFFF;
+  }
+
+  .progress-bar {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    animation: loading 1.5s infinite;
+  }
+}
+
+@layer utilities {
+  .bg-void-black {
+    background-color: #000000;
+  }
+  
+  .bg-resistance-red {
+    background-color: #FF0033;
+  }
+  
+  .bg-matrix-green {
+    background-color: #00FF00;
+  }
+  
+  .bg-deep-space {
+    background-color: #121212;
+  }
+  
+  .bg-terminal-gray {
+    background-color: #1e1e1e;
+  }
+
+  .bg-cyber-blue {
+    background-color: #0066FF;
+  }
+
+  .bg-data-yellow {
+    background-color: #FFD700;
+  }
+  
+  .text-void-black {
+    color: #000000;
+  }
+  
+  .text-resistance-red {
+    color: #FF0033;
+  }
+  
+  .text-stark-white {
+    color: #FFFFFF;
+  }
+  
+  .text-matrix-green {
+    color: #00FF00;
+  }
+
+  .text-data-yellow {
+    color: #FFD700;
+  }
+  
+  .border-resistance-red {
+    border-color: #FF0033;
+  }
+  
+  .border-matrix-green {
+    border-color: #00FF00;
+  }
+
+  .font-fira {
+    font-family: "Fira Code", monospace;
+  }
+  
+  .font-space {
+    font-family: "Space Mono", monospace;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translateX(0); }
+  31%, 33%, 65%, 67% { transform: translateX(5px); }
+  32%, 34%, 66%, 68% { transform: translateX(-5px); }
+  69%, 71% { transform: translateY(10px); }
+  70%, 72% { transform: translateY(-10px); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes loading {
+  100% { transform: translateX(100%); }
+}
