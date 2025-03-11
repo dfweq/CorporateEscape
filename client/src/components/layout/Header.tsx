@@ -65,52 +65,30 @@ export default function Header() {
         </nav>
         
         <div className="flex items-center space-x-4">
-          {user ? (
-            <>
-              <div className="relative">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-stark-white focus:outline-none p-0 relative">
-                      <i className="fas fa-bell"></i>
-                      {unreadCount > 0 && (
-                        <Badge className="absolute -top-1 -right-1 bg-resistance-red text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                          {unreadCount}
-                        </Badge>
-                      )}
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="bg-deep-space border border-resistance-red">
-                    <DropdownMenuItem className="text-matrix-green">View all notifications</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center space-x-2 focus:outline-none p-0">
-                    <div className="w-8 h-8 rounded-full bg-resistance-red flex items-center justify-center text-void-black font-bold">
-                      {user.avatarInitials}
-                    </div>
-                    <span className="hidden md:inline-block">#{user.username}</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-deep-space border border-resistance-red">
-                  <DropdownMenuItem className="text-matrix-green">Profile</DropdownMenuItem>
-                  <DropdownMenuItem className="text-matrix-green">Settings</DropdownMenuItem>
-                  <DropdownMenuItem className="text-resistance-red" onClick={handleLogout}>
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          ) : (
-            <Button 
-              className="bg-void-black border border-resistance-red hover:bg-resistance-red hover:text-void-black transition"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </Button>
-          )}
+          <div className="relative">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="text-stark-white focus:outline-none p-0 relative">
+                  <i className="fas fa-bell"></i>
+                  {unreadCount > 0 && (
+                    <Badge className="absolute -top-1 -right-1 bg-resistance-red text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                      {unreadCount}
+                    </Badge>
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-deep-space border border-resistance-red">
+                <DropdownMenuItem className="text-matrix-green">View all notifications</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 rounded-full bg-matrix-green flex items-center justify-center text-void-black font-bold">
+              ID
+            </div>
+            <span className="hidden md:inline-block text-matrix-green">AGENT</span>
+          </div>
           
           <Button 
             className="md:hidden text-stark-white p-0" 

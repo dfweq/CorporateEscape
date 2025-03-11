@@ -66,13 +66,30 @@ export default function NotificationPanel() {
     );
   }
   
+  // We're showing notifications without requiring login
   if (!user) {
+    // Instead of requiring login, we'll show sample data
     return (
       <section className="bg-deep-space border border-resistance-red p-4">
         <div className="border-b border-resistance-red pb-2 mb-4">
           <h2 className="text-lg font-bold">NOTIFICATIONS</h2>
         </div>
-        <p className="text-matrix-green">Login to view your notifications.</p>
+        <div className="space-y-3">
+          <div className="bg-resistance-red bg-opacity-20 border-l-4 border-resistance-red p-3">
+            <div className="flex justify-between">
+              <span className="text-xs text-resistance-red">SYSTEM</span>
+              <span className="text-xs">just now</span>
+            </div>
+            <p className="text-sm mt-1">Welcome to ExitNode. Your anonymous profile has been created.</p>
+          </div>
+          <div className="bg-void-black border border-matrix-green p-3">
+            <div className="flex justify-between">
+              <span className="text-xs text-matrix-green">UPDATE</span>
+              <span className="text-xs">2 hours ago</span>
+            </div>
+            <p className="text-sm mt-1">New departures detected from your selected company.</p>
+          </div>
+        </div>
       </section>
     );
   }

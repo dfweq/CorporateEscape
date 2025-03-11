@@ -1,36 +1,31 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CompanySelection from "@/components/dashboard/CompanySelection";
+import SimpleCompanySelect from "@/components/dashboard/SimpleCompanySelect";
 import DepartureStats from "@/components/dashboard/DepartureStats";
 import BurnoutLeaderboard from "@/components/dashboard/BurnoutLeaderboard";
 import NetworkActivity from "@/components/dashboard/NetworkActivity";
 import NotificationPanel from "@/components/dashboard/NotificationPanel";
-import { useAuth } from "@/context/AuthContext";
-import { useLocation } from "wouter";
-import { useEffect } from "react";
+import { useCompany } from "@/context/CompanyContext";
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
-  const { isAuthenticated, isLoading } = useAuth();
-  const [_, navigate] = useLocation();
+  const { selectedCompany } = useCompany();
+  const [initialSelectionMade, setInitialSelectionMade] = useState(false);
   
-  // Redirect to login if not authenticated
+  // Track if user has selected a company
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      navigate('/login');
+    if (selectedCompany && !initialSelectionMade) {
+      setInitialSelectionMade(true);
     }
-  }, [isAuthenticated, isLoading, navigate]);
-  
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-resistance-red text-xl">Loading...</div>
-      </div>
-    );
-  }
+  }, [selectedCompany, initialSelectionMade]);
   
   return (
     <div id="main-dashboard">
       <Header />
+      
+      {/* Show company selection overlay if no selection has been made */}
+      {!initialSelectionMade && <SimpleCompanySelect />}
       
       <main className="container mx-auto px-4 py-6">
         <CompanySelection />
